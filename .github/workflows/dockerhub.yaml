@@ -22,7 +22,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./flohmarkt
-          file: ./Dockerfile
+          file: ./flohmarkt/Dockerfile
           push: true
           tags: yonggan/flohmarkt:daily
       - name: Image digest
