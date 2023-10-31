@@ -1,0 +1,27 @@
+name: Push to Dockerhub
+on: 
+  schedule:
+    - cron: '0 0 * * *'
+jobs:
+  push-to-dockerhub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      - uses: actions/checkout@v2
+      - name: Get Dockerfile
+        run: |
+          wget https://codeberg.org/grindhold/flohmarkt/raw/branch/master/Dockerfile
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: yonggan/flohmarkt:daily
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}
