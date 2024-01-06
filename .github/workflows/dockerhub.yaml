@@ -17,12 +17,10 @@ jobs:
       - name: Get Dockerfile
         run: |
           git clone https://codeberg.org/grindhold/flohmarkt.git
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
+      - name: Build and push Docker images
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: ./flohmarkt
-          file: ./flohmarkt/Dockerfile
           push: true
           tags: yonggan/flohmarkt:daily
       - name: Image digest
