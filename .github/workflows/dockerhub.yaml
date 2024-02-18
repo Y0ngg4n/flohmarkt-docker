@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Get Dockerfile
         run: |
-          git clone https://codeberg.org/grindhold/flohmarkt.git
+          git clone https://codeberg.org/flohmarkt/flohmarkt
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
